@@ -1,4 +1,4 @@
-# Týden 2: SharePoint a oprávnění podle rolí
+# Fáze 2: SharePoint a oprávnění podle rolí
 
 Zkušební tenant Microsoft 365 Business Basic, 22. 10. 2026. Všechna jména jsou smyšlená.
 
@@ -88,7 +88,7 @@ Příklad:
 | Vedení | Vedení | nikdo |
 | Provoz a IT | Provoz | Vedení |
 
-K otestování: přidat Karla do skupiny Vedení, ověřit v *Zkontrolovat oprávnění* Úpravy (přes Členy webu), pak ho odebrat a ověřit návrat na Čtení. Změna členství se může propsat se zpožděním. Stav: zatím nevyzkoušeno.
+Ověřeno na miniatuře (viz níže): Karel ve skupinách Granty a Vedení. Na webu Granty má Úpravy (z Granty) a Čtení (z Vedení, které je tam mezi návštěvníky), platí vyšší. Na webu Vedení měl před přidáním Žádnou, po přidání Úpravy, po odebrání zase Žádnou. Změna členství se může propsat se zpožděním.
 
 ## Co znamená „Úpravy"
 Úroveň Úpravy (Edit) dovoluje soubory nahrávat, otevírat, měnit, přejmenovávat, přesouvat a **mazat**, stejně jako složky a položky seznamů. Zahrnuje i správu **knihoven a seznamů**: člen může knihovnu vytvořit, přidat sloupec, změnit pohled i knihovnu **smazat**. Nemůže měnit oprávnění a nastavení webu (to je Úplné řízení).
@@ -102,7 +102,11 @@ K otestování: přidat Karla do skupiny Vedení, ověřit v *Zkontrolovat oprá
 
 Přispívat je pro běžné kolegy často lepší volba než Úpravy. Skupině se přidělí přes *Rozšířená nastavení oprávnění → Udělit oprávnění*.
 
-Mazání není konečné: smazané soubory jdou do koše (celkem 93 dní, nejdřív koš uživatele, pak koš správce) a každý soubor má historii verzí. Stav: Přispívat zatím nevyzkoušeno.
+Mazání není konečné: smazané soubory jdou do koše (celkem 93 dní, nejdřív koš uživatele, pak koš správce) a každý soubor má historii verzí.
+
+Ověřeno na miniatuře: uživatel s úrovní Přispívat nahrál a smazal soubor v knihovně Dokumenty. V Obsahu webu neměl tlačítko *Nové* (nové seznamy a knihovny nevytvoří) a uvnitř knihovny neměl v nastavení odkaz *Nastavení knihovny*. Smazání celého seznamu zatím není vyzkoušeno (až s prvním seznamem).
+
+Úroveň Přispívat není v dialogu *Sdílet web* (ten nabízí jen Upravit, Číst a Úplné řízení). Přiděluje se přes *Rozšířená nastavení oprávnění → Udělit oprávnění → Zobrazit možnosti*; skupina se pak na webu objeví napřímo, mimo tři skupiny webu, proto se hůř hlídá.
 
 ## Sdílení
 Sdílení je druhá cesta k obsahu, vedle oprávnění webu. Pokud se nehlídá, obchází nastavenou strukturu.
@@ -125,11 +129,14 @@ U odkazu se volí úroveň (*Může upravovat* / *Může zobrazit*), datum ukon�
 - Každé sdílení vytváří unikátní oprávnění na souboru. Kdokoli s odkazem obchází celou strukturu.
 
 ### Co jsem zjistil v testovacím tenantu
-- *Spravovat přístup* u souboru v knihovně Dokumenty: karta **Skupiny (3)** ukazuje Vlastníky (Vlastník), Návštěvníky (Může zobrazit) a Členy (Může upravit). Soubor tedy dědí oprávnění z webu. Karty **Lidé (1)** a **Odkazy** nezkontrolovány.
+- *Spravovat přístup* u souboru v knihovně Dokumenty: karta **Skupiny (3)** ukazuje Vlastníky (Vlastník), Návštěvníky (Může zobrazit) a Členy (Může upravit). Soubor tedy dědí oprávnění z webu.
+- Po sdílení souboru konkrétnímu člověku (Může upravit) se oprávnění zapsalo **přímo na soubor**: objevilo se na kartě **Lidé**, karta **Odkazy** zůstala prázdná. Člověk měl na webu jen Čtení, na souboru Úpravy. Skupiny z webu zůstaly beze změny.
+- Odkaz *Lidé v organizaci, může zobrazit* se objevil na kartě **Odkazy (1)**. Otevře soubor komukoli přihlášenému v tenantu, kdo ho dostane, i když na webu nemá přístup. U tohoto typu odkazu se datum ukončení platnosti nenabízí.
+- Úklid souboru: koš u odkazu a *Přestat sdílet* (vrací dědění z webu). Karty Lidé a Odkazy se po úklidu vrátily do původního stavu.
 - V dialogu *Nastavení odkazů* u souboru jsou jen tři volby: Lidé v organizaci, Pouze lidé s existujícím přístupem, Lidé, které zvolíte. Volba „Kdokoli" tam **není**. Dále je tam *Může upravit / Může zobrazit* a datum ukončení platnosti.
 - Nastavení tenantu (Zásady → Sdílení): externí sdílení SharePointu i OneDrivu je podle posuvníků na nejvolnější úrovni **Všichni**, výchozí typ odkazu je **Kdokoliv, kdo má odkaz**, výchozí oprávnění odkazu **Upravit**, platnost odkazů není omezena. Je to běžné výchozí nastavení nového tenantu.
-- Proč dialog u souboru „Kdokoli" nenabízí, není ověřeno. Pravděpodobně je sdílení na webu přísnější než na tenantu. Zkontrolovat v Aktivní weby → Test intranet → Nastavení → Externí sdílení.
-- Nastavení tenantu jsem zatím **nezměnil**.
+- Proč dialog u souboru „Kdokoli" nenabízí: nastavení **webu** (Aktivní weby → web → Sdílení) je **Jenom lidé ve vaší organizaci**, tedy přísnější než tenant (Všichni). Web může být jen přísnější než tenant. Výchozí typ odkazu a výchozí oprávnění má web „stejné jako organizace" (Kdokoliv, Upravit). Kdyby se web přepnul na Kdokoli, výchozí odkaz by byl veřejný s právem upravovat. Proč je nový web přísnější než tenant, jsem neověřoval.
+- V této chvíli testu jsem nastavení tenantu ještě nezměnil. Změnu a její ověření popisuje část *Zpřísnění sdílení v tenantu* níže.
 
 ### Doporučené nastavení pro nadaci
 1. Externí sdílení: posuvník na **Existující hosté** nebo **Jenom lidé ve vaší organizaci**; hosty přidávat až při potřebě.
@@ -142,6 +149,41 @@ U odkazu se volí úroveň (*Může upravovat* / *Může zobrazit*), datum ukon�
 8. Při zpřísnění nastavení v reálném tenantu nejdřív zjistit, kdo stávající veřejné odkazy používá, protože po změně přestanou fungovat.
 
 Při sdílení souboru jde vždy o tři otázky: komu (organizaci, existujícím, jmenovaným), s jakou úrovní (zobrazit, upravit) a na jak dlouho (datum ukončení). Nejbezpečnější je *Lidé, které zvolíte* s datem ukončení.
+
+## Ověření na miniatuře nadace (hub, více skupin, společná knihovna)
+Aby bylo ověření blíž skutečné organizaci, postavil jsem malou miniaturu. Vše níže jsem v tenantu viděl.
+
+**Skupiny zabezpečení:** Vedení (Eva), Granty (Karel, Jana), Finance (Jana).
+
+**Hub a weby:** komunikační web Test nadace zaregistrovaný jako hub (v admin centru se hub jmenuje *Rozbočovač*) a k němu připojené komunikační weby Granty, Vedení, Finance.
+
+| Web | Členové (Úpravy) | Návštěvníci (Čtení) |
+|---|---|---|
+| Granty | Granty | Vedení |
+| Vedení | Vedení | nikdo |
+| Finance | Finance | Vedení |
+
+- Po připojení k hubu přibyla na webu skupina *Návštěvníci centrálního webu* s úrovní Čtení, zatím bez členů. Kdo by se do ní přidal, četl by všechny připojené weby včetně citlivých, proto do ní nepatří široká skupina.
+- Web Granty měl v panelu Oprávnění hlášku o dalších skupinách s přístupem; vysvětlení bylo v *Rozšířených nastaveních oprávnění* (právě ta skupina hubu).
+- Stránka SharePoint → Weby → Nedávné je u nového uživatele prázdná, nepřipraví mu přehled jeho webů. Je potřeba mu dát vstupní bod (viz *Cesta uživatele k webům* níže).
+
+**Společná knihovna s vlastními oprávněními:** na webu Granty knihovna *Spolecne s Finance*, dědění ukončeno, odebráni Návštěvníci, zůstali Vlastníci a Členové webu Granty a přidána skupina Finance s úrovní Přispívat.
+
+| Kdo | Výsledek v knihovně |
+|---|---|
+| Eva (Vedení) | Žádná |
+| Karel (Granty) | Úpravy přes Členy webu Granty |
+| Jana (Granty a Finance) | Úpravy (z Granty) a Přispívání (z Finance), efektivně Úpravy |
+| Skupina Finance | Přispívání, uděleno přímo |
+
+**Pravidlo, které z toho vychází (kam patří společné soubory):**
+| Situace | Řešení |
+|---|---|
+| Soubor má jednoho vlastníka (jeden program) a spolupracují na něm další týmy | další knihovna na webu vlastníka s vlastními oprávněními, ostatní týmy Přispívat |
+| Soubor je zdroj, ze kterého čerpá víc týmů | samostatný web s vlastním vlastníkem, ostatní čtou |
+| Jednorázové sdílení | odkaz Konkrétní lidé s datem ukončení, zapsat do přehledu sdílení |
+
+Každé společné místo má mít jmenovaného vlastníka a řádek v přehledu sdílení (soubor nebo knihovna, vlastník, komu, jak, proč, do kdy, datum kontroly). Samostatné weby pro společné soubory pojmenovat jednotně a ukázat v navigaci hubu.
 
 ## Účty a role
 - Na běžnou práci osobní účet bez správcovských práv.
@@ -160,9 +202,10 @@ Při sdílení souboru jde vždy o tři otázky: komu (organizaci, existujícím
 - Výchozí nastavení sdílení nového tenantu je příliš volné.
 
 ## Dále
-- Dokončit ověření: Karel ve více skupinách, úroveň Přispívat, karty Lidé a Odkazy u souboru, nastavení sdílení na webu.
-- Případně zpřísnit sdílení v tenantu a výsledek doplnit.
-- Druhý web pro srovnání (jen Vedení) a hub.
-- Týden 3: Microsoft Lists a Power Automate.
+- Zpřísnit sdílení v tenantu (zatím jen doporučení) a výsledek doplnit.
+- Ověřit, jak uživatel najde své weby bez adres (navigace hubu, sledované weby, Teams) a výsledek doplnit.
+- Smazání celého seznamu úrovní Přispívat ověřit s prvním seznamem.
+- Fáze 3: SharePoint Lists a metadata.
+- Fáze 4: Power Automate, první tok.
 
 *Screenshoty doplnit až po začernění jména, názvu tenantu a e-mailů (název tenantu se v dialogu sdílení zobrazuje jako název organizace).*
