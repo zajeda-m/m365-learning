@@ -1,4 +1,4 @@
-# Týden 1: uživatelé, licence, skupiny a role správců
+# Fáze 1: uživatelé, licence, skupiny a role správců
 
 Studijní poznámky z vlastního zkušebního tenantu Microsoft 365 Business Basic.
 Všechna jména jsou smyšlená, screenshoty jsou bez osobních údajů.
@@ -91,5 +91,5 @@ Pro běžnou práci (SharePoint, Power Platform, koordinace) není potřeba glob
 
 ## Co dál
 - Projít protokol přihlášení (Entra ID, Přihlášení uživatele) a zapsat, co ukazuje.
-- Týden 2: SharePoint web, knihovny a oprávnění přes skupiny Vedení a Tým.
+- Fáze 2: SharePoint, weby, oprávnění a sdílení (viz [../sharepoint/tyden-2-opravneni.md](../sharepoint/tyden-2-opravneni.md)).
 - Zkusit přiřadit testovacímu uživateli omezenou roli (např. Správce SharePointu) a porovnat, co uvidí.
