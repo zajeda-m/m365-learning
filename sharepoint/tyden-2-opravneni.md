@@ -59,7 +59,7 @@ Knihovny nejsou na oprávnění, ale na orientaci v dokumentech. Každá má vla
 3. Stejní lidé, stejný typ, jiný rok nebo téma: sloupec, nejvýš dvě úrovně složek.
 4. Strukturovaná data místo souborů: seznam (List).
 
-## Příklad struktury pro menší nadaci (jen návrh)
+## Příklad struktury pro menší organizaci (jen návrh)
 | Web | Upravuje | Čte | Knihovny |
 |---|---|---|---|
 | Intranet | komunikace, koordinátor | všichni | Směrnice a postupy, Návody, Nástup a odchod, Šablony |
@@ -71,7 +71,7 @@ Knihovny nejsou na oprávnění, ale na orientaci v dokumentech. Každá má vla
 Na každém webu: Vlastníci = správci (dva lidé), Členové = skupina, která obsah tvoří, Návštěvníci = skupina, která jen čte. Knihovny a složky dědí bez výjimek.
 
 ## Lidé ve více týmech
-V nadaci bude běžné, že je člověk ve více týmech. Ve SharePointu to nevadí.
+V menší organizaci bude běžné, že je člověk ve více týmech. Ve SharePointu to nevadí.
 
 - Oprávnění se **sčítají**: člověk má vše, co mu dává kterákoli z jeho skupin. Je-li v Týmu (Čtení) a ve Vedení (Úpravy), má Úpravy.
 - **Odepřít (deny) ve SharePointu neexistuje.** Přístup se omezuje tím, že se skupina na daný web nedá.
@@ -138,7 +138,7 @@ U odkazu se volí úroveň (*Může upravovat* / *Může zobrazit*), datum ukon�
 - Proč dialog u souboru „Kdokoli" nenabízí: nastavení **webu** (Aktivní weby → web → Sdílení) je **Jenom lidé ve vaší organizaci**, tedy přísnější než tenant (Všichni). Web může být jen přísnější než tenant. Výchozí typ odkazu a výchozí oprávnění má web „stejné jako organizace" (Kdokoliv, Upravit). Kdyby se web přepnul na Kdokoli, výchozí odkaz by byl veřejný s právem upravovat. Proč je nový web přísnější než tenant, jsem neověřoval.
 - V této chvíli testu jsem nastavení tenantu ještě nezměnil. Změnu a její ověření popisuje část *Zpřísnění sdílení v tenantu* níže.
 
-### Doporučené nastavení pro nadaci
+### Doporučené nastavení pro menší organizaci
 1. Externí sdílení: posuvník na **Existující hosté** nebo **Jenom lidé ve vaší organizaci**; hosty přidávat až při potřebě.
 2. Výchozí typ odkazu: **Konkrétní lidé**.
 3. Výchozí oprávnění odkazu: **Zobrazovat**.
@@ -150,12 +150,12 @@ U odkazu se volí úroveň (*Může upravovat* / *Může zobrazit*), datum ukon�
 
 Při sdílení souboru jde vždy o tři otázky: komu (organizaci, existujícím, jmenovaným), s jakou úrovní (zobrazit, upravit) a na jak dlouho (datum ukončení). Nejbezpečnější je *Lidé, které zvolíte* s datem ukončení.
 
-## Ověření na miniatuře nadace (hub, více skupin, společná knihovna)
+## Ověření na miniatuře organizace (hub, více skupin, společná knihovna)
 Aby bylo ověření blíž skutečné organizaci, postavil jsem malou miniaturu. Vše níže jsem v tenantu viděl.
 
 **Skupiny zabezpečení:** Vedení (Eva), Granty (Karel, Jana), Finance (Jana).
 
-**Hub a weby:** komunikační web Test nadace zaregistrovaný jako hub (v admin centru se hub jmenuje *Rozbočovač*) a k němu připojené komunikační weby Granty, Vedení, Finance.
+**Hub a weby:** komunikační web Test organizace zaregistrovaný jako hub (v admin centru se hub jmenuje *Rozbočovač*) a k němu připojené komunikační weby Granty, Vedení, Finance.
 
 | Web | Členové (Úpravy) | Návštěvníci (Čtení) |
 |---|---|---|
